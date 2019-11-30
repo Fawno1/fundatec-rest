@@ -23,5 +23,8 @@ public class CarroService {
         return carroRepository.consultar(id);
     }
 
+    public Carro incluir(Carro carro) {
+        return carroRepository.incluir(carro);
+    }
     }
 

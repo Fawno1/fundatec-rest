@@ -21,9 +21,9 @@ public class CarroRepository {
         return listaResultado;
     }
 
-    public Carro consultar(long id){
-        for(Carro carro : listaCarros) {
-            if(carro.getId().equals(id)) {
+    public Carro consultar(long id) {
+        for (Carro carro : listaCarros) {
+            if (carro.getId().equals(id)) {
                 return carro;
             }
         }
@@ -31,11 +31,28 @@ public class CarroRepository {
     }
 
 
-        private static List<Carro> listaCarros =
-         Arrays.asList(new Carro(1L, "Mustang", "MAX1000"),
-                new Carro(2L, "Uno com escada", "ABC1234"),
-                new Carro(3L, "Chevette", "ASD1235"));
+    private static List<Carro> listaCarros =
+            Arrays.asList(new Carro(1L, "Mustang", "MAX1000"),
+                    new Carro(2L, "Uno com escada", "ABC1234"),
+                    new Carro(3L, "Chevette", "ASD1235"));
 
+    public Carro incluir(Carro carro) {
+        carro.setId(new Long(listaCarros.size() + 1));
+        listaCarros.add(carro);
+        return carro;
     }
+
+    private List<Carro> getListaCarros() {
+        if (listaCarros == null) {
+            listaCarros = new ArrayList<>();
+            listaCarros.add(new Carro(1L, "Mustang", "MAX1000"));
+            listaCarros.add(new Carro(2L, "Uno com escada", "ABC1234"));
+            listaCarros.add(new Carro(3L, "Chevette", "ASD1235"));
+        }
+        return listaCarros;
+    }
+
+
+}
 
 

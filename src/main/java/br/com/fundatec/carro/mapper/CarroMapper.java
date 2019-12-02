@@ -13,7 +13,7 @@ public class CarroMapper {
 
     public CarroOutputDto mapear(Carro carro) {
         CarroOutputDto carroOutputDto = new CarroOutputDto();
-        carroOutputDto.setId(carro.getId());
+        carroOutputDto.setPlaca(carro.getPlaca());
         carroOutputDto.setNome(carro.getNome());
         return carroOutputDto;
     }

@@ -24,6 +24,10 @@ public class CarroService {
     }
 
     public Carro incluir(Carro carro) {
+        if (carro.getDataModelo().isBefore(carro.getDataFabricacao())) {
+            throw new RuntimeException("Data de fabricacão deve ser menor que o data do modelo");
+        }
+
         return carroRepository.incluir(carro);
     }
     }

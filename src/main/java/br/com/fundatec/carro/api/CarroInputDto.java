@@ -1,9 +1,6 @@
 package br.com.fundatec.carro.api;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class CarroInputDto {
@@ -18,8 +15,18 @@ public class CarroInputDto {
     @NotNull(message = "O campo data de fabricação é obrigatório!")
     private LocalDate dataFabricacao;
 
-    @NotNull(message = "O campo data do modelo é obrigatório!")
     private LocalDate dataModelo;
+
+    @NotEmpty(message = "O camp de marca é obrigatório!")
+    private String marca;
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
     public LocalDate getDataFabricacao() {
         return dataFabricacao;

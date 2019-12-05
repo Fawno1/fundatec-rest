@@ -14,6 +14,16 @@ public class Carro {
 
     private LocalDate dataModelo;
 
+    private String marca;
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public LocalDate getDataFabricacao() {
         return dataFabricacao;
     }

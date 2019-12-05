@@ -15,18 +15,18 @@ public class CarroApi {
 
     private final CarroService carroService;
     private final CarroMapper carroMapper;
-    public CarroApi(CarroService carroService, CarroMapper carroMapper){
+
+    public CarroApi(CarroService carroService, CarroMapper carroMapper) {
         this.carroService = carroService;
         this.carroMapper = carroMapper;
     }
 
 
-
     @GetMapping("/carros")
-    public ResponseEntity <List<CarroOutputDto> >getCarros(@RequestParam(required = false, defaultValue = "") String nome) {
+    public ResponseEntity<List<CarroOutputDto>> getCarros(@RequestParam(required = false, defaultValue = "") String nome) {
         List<Carro> carros = carroService.listarCarros(nome);
 
-        if(carros.size() == 0) {
+        if (carros.size() == 0) {
             return ResponseEntity.noContent()
                     .build();
         }
@@ -36,11 +36,11 @@ public class CarroApi {
 
 
     @GetMapping("/carros/{id}")
-    public  ResponseEntity<CarroOutputDto> getCarro(@PathVariable Long id){
+    public ResponseEntity<CarroOutputDto> getCarro(@PathVariable Long id) {
 
         Carro carro = carroService.consultur(id);
 
-        if(carro != null) {
+        if (carro != null) {
             CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
             return ResponseEntity.ok(carroOutputDto);
         }
@@ -50,10 +50,17 @@ public class CarroApi {
 
     @PostMapping("/carros")
 
-    public ResponseEntity<CarroOutputDto> incluir(@Valid @RequestBody CarroInputDto carroInputDto){
+    public ResponseEntity<?> incluir(@Valid @RequestBody CarroInputDto carroInputDto) {
         Carro carro = carroMapper.mapear(carroInputDto);
-        carro = carroService.incluir(carro);
-        CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDto);
+        try {
+            carro = carroService.incluir(carro);
+            CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
+            return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDto);
+        } catch (RuntimeException e) {
+            ErroDto erroDto = new ErroDto();
+            erroDto.setMensagem(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(erroDto);
+        }
     }
 }

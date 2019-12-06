@@ -20,6 +20,8 @@ public class CarroInputDto {
     @NotEmpty(message = "O camp de marca é obrigatório!")
     private String marca;
 
+    private LocalDate dataInicio;
+
     public String getMarca() {
         return marca;
     }

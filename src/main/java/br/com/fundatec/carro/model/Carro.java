@@ -1,10 +1,8 @@
 package br.com.fundatec.carro.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Carro {
@@ -23,49 +21,8 @@ public class Carro {
 
     private String marca;
 
-    private LocalDate dataInicio;
-
-    private LocalDate dataFim;
-
-    public LocalDate getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(LocalDate dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public LocalDate getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(LocalDate dataFim) {
-        this.dataFim = dataFim;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public LocalDate getDataFabricacao() {
-        return dataFabricacao;
-    }
-
-    public void setDataFabricacao(LocalDate dataFabricacao) {
-        this.dataFabricacao = dataFabricacao;
-    }
-
-    public LocalDate getDataModelo() {
-        return dataModelo;
-    }
-
-    public void setDataModelo(LocalDate dataModelo) {
-        this.dataModelo = dataModelo;
-    }
+    @OneToMany(mappedBy = "carro")
+    private Set<Reserva> reservas;
 
     public Carro() {
 
@@ -99,5 +56,29 @@ public class Carro {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public LocalDate getDataFabricacao() {
+        return dataFabricacao;
+    }
+
+    public void setDataFabricacao(LocalDate dataFabricacao) {
+        this.dataFabricacao = dataFabricacao;
+    }
+
+    public LocalDate getDataModelo() {
+        return dataModelo;
+    }
+
+    public void setDataModelo(LocalDate dataModelo) {
+        this.dataModelo = dataModelo;
     }
 }

@@ -17,7 +17,7 @@ public class CarroInputDto {
 
     private LocalDate dataModelo;
 
-    @NotEmpty(message = "O camp de marca é obrigatório!")
+    @NotEmpty(message = "O campo de marca é obrigatório!")
     private String marca;
 
     private LocalDate dataInicio;
